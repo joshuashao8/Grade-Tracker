@@ -40,7 +40,7 @@ export function AppSidebar() {
                         
                         <Accordion type="single"  collapsible defaultValue="courses-item" className="max-w-lg border-none">
                             <AccordionItem value="courses-item" className="border-none">
-                                <AccordionTrigger className="no-underline py-2 font-light ml-1">Courses</AccordionTrigger>
+                                <AccordionTrigger className="hover:no-underline px-3 py-2 font-light ml-1">Courses</AccordionTrigger>
                                 <AccordionContent>
                                     {data.map((course) => ( 
                                         <SidebarMenuItem key={course.id}>

@@ -46,22 +46,22 @@ export function CourseDetail() {
     const finalMark = CalculateMark(course.categories);
 
     return (
-        <div className="flex-1 flex flex-col p-6 space-y-4">
+        <div className="flex-1 flex w-full flex-col p-6 space-y-4">
             <h1 className="text-3xl font-bold">Course Detail of {course.name}</h1>
             <p className="text-xl">
                 Current Mark: <span className="font-semibold">{finalMark.toFixed(1)}%</span>
             </p>
 
             <Separator className="my-6 mb-1" />
-            <div className="scroll-fade-20">
+            <div className="w-full scroll-fade-20">
                 {course.categories.map((category) => (
-                    <Card className="mx-auto w-full shadow-2xl my-6">
+                    <Card key={category.id} className="mx-auto w-full shadow-2xl my-6">
                         <CardHeader>
                             <CardTitle className="text-xl font-bold">{category.name}</CardTitle>
                             <CardDescription>{category.id}</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            
+
                         </CardContent>
                         <CardFooter>
                             <Button variant="outline" className="w-full">
