@@ -10,4 +10,4 @@ This is a small passion project where I practice full stack development!
 # Development Timeline
 ## 2026-06-30
 <img width="1153" height="1129" alt="image" src="https://github.com/user-attachments/assets/5287b5e4-2b3e-4e61-9268-f4ea6651a9b6" />
-<img width="1153" height="1129" alt="image" src="https://github.com/user-attachments/assets/5ceabb1e-5706-40b3-8aa9-b5a390fd5e65" />
+<img width="1154" height="1140" alt="image" src="https://github.com/user-attachments/assets/b7ce944f-2b5f-4cd3-a889-4472d80f30e1" />
