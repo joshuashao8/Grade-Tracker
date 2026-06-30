@@ -22,8 +22,8 @@ export default function App() {
       <SidebarProvider>
         <div className="flex min-h-screen">
           <AppSidebar />
-          <main className="flex-1 flex flex-col p-6">
-            <SidebarTrigger className="p-5 pt-6"/>
+          <main className="flex-1 flex flex-col p-6 scroll-fade scroll-fade-4">
+            <SidebarTrigger className="p-5 pt-6 scroll-fade-20"/>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
 
