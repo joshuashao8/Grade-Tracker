@@ -14,6 +14,8 @@ import {
 import {Button} from "@/components/ui/button"
 import { Separator} from "@/components/ui/separator"
 
+import {EditItems} from "@/components/EditItems"
+import {EditCategories} from "@/components/EditCategories"
 
 export function CalculateMark(categories: Category[]): number {
     let totalMark = 0;
@@ -35,6 +37,7 @@ export function CalculateMark(categories: Category[]): number {
     return (totalMark / totalWeightUsed) * 100;
 }
 
+
 export function CourseDetail() {
     const {id} = useParams();
 
@@ -50,10 +53,11 @@ export function CourseDetail() {
             <div className="flex">
                 <h1 className="text-3xl font-bold">Course Information on </h1>
                 <h1 className="text-3xl pl-3 font-bold text-primary shimmer">{course.name}</h1>
-
             </div>
+            <p className="text-xl font-semibold text-muted-foreground">{course.id}</p>
+
             <p className="text-xl">
-                Current Mark: <span className="font-semibold">{finalMark.toFixed(1)}%</span>
+                Current Mark: <span className="pl-1 font-bold shimmer text-3xl text-primary">{finalMark.toFixed(2)}%</span>
             </p>
 
             <Separator className="my-6 mb-1" />
@@ -62,7 +66,7 @@ export function CourseDetail() {
                     <Card key={category.id} className="mx-auto w-full shadow-2xl my-6">
                         <CardHeader>
                             <CardTitle className="px-3 text-xl font-bold">{category.name}</CardTitle>
-                            <CardDescription className="px-3">{category.id}</CardDescription>
+                            <CardDescription className="px-3 pb-1">{category.weight}% of final mark</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             {category.items.map((item) => (
@@ -82,15 +86,13 @@ export function CourseDetail() {
                             ))}
                         </CardContent>
                         <CardFooter>
-                            <Button variant="outline" className="w-full shadow-lg">
-                                Edit
-                            </Button>
+                            <EditItems />
                         </CardFooter>
                     </Card>
                 ))
                 }
             </div>
-            <Button>Add New Category</Button>
+            <EditCategories />
         </div>
     )
 }

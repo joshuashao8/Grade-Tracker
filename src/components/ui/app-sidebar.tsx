@@ -6,6 +6,17 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom";
 
