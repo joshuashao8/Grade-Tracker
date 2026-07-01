@@ -38,7 +38,7 @@ export function AppSidebar() {
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                         
-                        <Accordion type="single"  collapsible defaultValue="courses-item" className="max-w-lg border-none">
+                        <Accordion type="single"  collapsible defaultValue="courses-item" className="max-w-lg border-none rounded-md">
                             <AccordionItem value="courses-item" className="border-none">
                                 <AccordionTrigger className="hover:no-underline px-3 py-2 font-light ml-1">Courses</AccordionTrigger>
                                 <AccordionContent>
