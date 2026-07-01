@@ -2,10 +2,11 @@
 
 This is a small passion project where I practice full stack development!
 
-## Features 
+## Goals 
 - Calculate weighted average of courses
 - Analyze past marks and see detailed graphs of top 6 + overall average
 - Generate goals thresholds for top programs?
+- Add account functionality + google login???
 
 # Development Timeline
 ## 2026-06-30
