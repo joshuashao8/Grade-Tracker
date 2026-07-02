@@ -17,6 +17,8 @@ import { Separator} from "@/components/ui/separator"
 import {EditItems} from "@/components/EditItems"
 import {EditCategories} from "@/components/EditCategories"
 
+import { useState } from "react";
+
 export function CalculateMark(categories: Category[]): number {
     let totalMark = 0;
     let totalWeightUsed = 0;
@@ -43,11 +45,13 @@ export function CourseDetail() {
 
     const course = data.find((c) => c.id === id);
 
+    
     if (!course) {
         return <div> Course not found</div>;
     }
     const finalMark = CalculateMark(course.categories);
 
+    const [courseData, setCourseData] = useState(course);
     return (
         <div className="flex-1 flex w-full flex-col p-6 space-y-4 scroll-fade-20">
             <div className="flex">
@@ -62,8 +66,8 @@ export function CourseDetail() {
 
             <Separator className="my-6 mb-1" />
             <div className="w-full scroll-fade-20">
-                {course.categories.map((category) => (
-                    <Card key={category.id} className="mx-auto w-full shadow-2xl my-6">
+                {courseData.categories.map((category) => (
+                    <Card key={category.id} className="mx-auto w-full shadow-2xl my-6 ">
                         <CardHeader>
                             <CardTitle className="px-3 text-xl font-bold">{category.name}</CardTitle>
                             <CardDescription className="px-3 pb-1">{category.weight}% of final mark</CardDescription>
@@ -86,13 +90,26 @@ export function CourseDetail() {
                             ))}
                         </CardContent>
                         <CardFooter>
-                            <EditItems />
+                            <EditItems 
+                            category={category} 
+                            onSave={(updatedItems) => {
+                                const updatedCategories = courseData.categories.map(c => 
+                                c.id === category.id ? { ...c, items: updatedItems } : c
+                                );
+                                setCourseData({ ...courseData, categories: updatedCategories });
+                            }} 
+                            />
                         </CardFooter>
                     </Card>
                 ))
                 }
             </div>
-            <EditCategories />
+                <EditCategories 
+                categories={courseData.categories} 
+                onSave={(updatedCats) => {
+                    setCourseData({ ...courseData, categories: updatedCats });
+                }} 
+                />
         </div>
     )
 }

@@ -13,35 +13,72 @@ import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export function EditCategories() {
+import {useState} from "react";
+
+import { Trash2, Plus } from "lucide-react"; 
+
+
+export function EditCategories({ categories, onSave }: { categories: any[]; onSave: (updatedCats: any[]) => void }) {
+  const [cats, setCats] = useState(categories);
+
+  const handleAddCategory = () => {
+    const newCat = { id: crypto.randomUUID(), name: "New Category", weight: 0, items: [] };
+    setCats([...cats, newCat]);
+  };
+
+  const handleRemoveCategory = (id: string) => {
+    setCats(cats.filter((c: any) => c.id !== id));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    const updatedCats = cats.map((c: any) => ({
+      ...c,
+      name: formData.get(`cat-name-${c.id}`) as string,
+      weight: Number(formData.get(`cat-weight-${c.id}`)),
+    }));
+
+    onSave(updatedCats);
+  };
+
   return (
     <Dialog>
-      <form>
-        <DialogTrigger render={<Button variant="outline">ManageCategories</Button>} />
-        <DialogContent className="sm:max-w-sm">
+      <DialogTrigger asChild>
+        <Button className="w-full">Manage Categories</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re
-              done.
-            </DialogDescription>
+            <DialogTitle>Course Structure</DialogTitle>
           </DialogHeader>
-          <FieldGroup>
-            <Field>
-              <Label htmlFor="name-1">Name</Label>
-              <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
-            </Field>
-            <Field>
-              <Label htmlFor="username-1">Username</Label>
-              <Input id="username-1" name="username" defaultValue="@peduarte" />
-            </Field>
-          </FieldGroup>
+
+          <div className="space-y-4 max-h-[50vh] overflow-y-auto">
+            {cats.map((cat: any) => (
+              <div key={cat.id} className="flex gap-2 items-end">
+                <div className="flex-grow">
+                  <Input name={`cat-name-${cat.id}`} defaultValue={cat.name} />
+                </div>
+                <div className="w-24">
+                  <Input name={`cat-weight-${cat.id}`} type="number" defaultValue={cat.weight} />
+                </div>
+                <Button type="button" variant="ghost" size="icon" onClick={() => handleRemoveCategory(cat.id)}>
+                  <Trash2 className="h-4 w-4 text-destructive" />
+                </Button>
+              </div>
+            ))}
+          </div>
+
+          <Button type="button" variant="secondary" className="w-full gap-2" onClick={handleAddCategory}>
+            <Plus className="h-4 w-4" /> Add New Category
+          </Button>
+
           <DialogFooter>
-            <DialogClose render={<Button variant="outline">Cancel</Button>} />
-            <Button type="submit">Save changes</Button>
+            <Button type="submit" className="w-full">Save Structure</Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
-  )
+  );
 }
